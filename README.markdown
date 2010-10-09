@@ -39,12 +39,12 @@ Also there is support for parallel actions:
       // Show the result when done
       function showStuff(err, code, users) {
         if (err) throw err;
-        sys.puts(code);
-        sys.puts(users);
+        sys.puts(code[0]);
+        sys.puts(users[0]);
       }
     )
 
-Here we pass `this.parallel()` instead of `this` as the callback.  It internally keeps track of the number of callbacks issued and preserves their order then giving the result to the next step after all have finished.  If there is an error in any of the parallel actions, it will be passed as the first argument to the next step.
+Here we pass `this.parallel()` instead of `this` as the callback.  It internally keeps track of the number of callbacks issued and preserves their order then giving the result to the next step after all have finished.  If there is an error in any of the parallel actions, it will be passed as the first argument to the next step.  Each call to `this.parallel()` added a parameter to the next function, `showStuff`, where the argument lists supplied to `this.parallel()` by `fs.readFile` are available as Arrays.
 
 Also you can use group with a dynamic number of common tasks.
 
